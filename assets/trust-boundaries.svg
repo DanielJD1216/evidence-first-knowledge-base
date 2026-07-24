@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img" aria-labelledby="title desc">
+  <title id="title">Public and private trust boundaries</title>
+  <desc id="desc">The public repository and private runtime are isolated. The public repository contains architecture, provider-neutral schemas, synthetic examples, and agent guidance. The private runtime contains evidence, credentials, database state, evaluation data, and backups. There is no network connection, synchronization path, or runtime credential between them.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07111f"/><stop offset="1" stop-color="#0d1020"/></linearGradient>
+    <style>.h{font:700 32px Inter,Segoe UI,sans-serif;fill:#f8fafc}.sub{font:400 16px Inter,Segoe UI,sans-serif;fill:#94a3b8}.k{font:700 13px Inter,Segoe UI,sans-serif;letter-spacing:2px}.t{font:650 19px Inter,Segoe UI,sans-serif;fill:#f8fafc}.s{font:400 14px Inter,Segoe UI,sans-serif;fill:#94a3b8}.wall{font:750 14px Inter,Segoe UI,sans-serif;letter-spacing:1.4px;fill:#fbbf24}.foot{font:600 15px Inter,Segoe UI,sans-serif;fill:#cbd5e1}</style>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg)"/><circle cx="200" cy="610" r="230" fill="#0ea5e9" opacity=".05"/><circle cx="1400" cy="130" r="240" fill="#8b5cf6" opacity=".06"/>
+  <text x="70" y="65" class="h">Public and private are separate systems</text><text x="70" y="98" class="sub">A documentation repository is not a runtime bridge.</text>
+
+  <rect x="70" y="145" width="620" height="430" rx="24" fill="#0b1d2d" stroke="#38bdf8" stroke-width="2"/>
+  <text x="110" y="190" class="k" fill="#38bdf8">PUBLIC REPOSITORY</text><text x="110" y="225" class="t">Safe, reviewable design surface</text>
+  <g><rect x="110" y="265" width="250" height="76" rx="13" fill="#0c2940" stroke="#0ea5e9"/><text x="134" y="296" class="t">Architecture</text><text x="134" y="321" class="s">Boundaries and decisions</text></g>
+  <g><rect x="400" y="265" width="250" height="76" rx="13" fill="#171a35" stroke="#8b5cf6"/><text x="424" y="296" class="t">Public contracts</text><text x="424" y="321" class="s">Provider-neutral schemas</text></g>
+  <g><rect x="110" y="370" width="250" height="76" rx="13" fill="#17243a" stroke="#38bdf8"/><text x="134" y="401" class="t">Synthetic examples</text><text x="134" y="426" class="s">No real company evidence</text></g>
+  <g><rect x="400" y="370" width="250" height="76" rx="13" fill="#231d32" stroke="#a78bfa"/><text x="424" y="401" class="t">Agent guidance</text><text x="424" y="426" class="s">Safe contribution rules</text></g>
+  <rect x="110" y="482" width="540" height="58" rx="12" fill="#10202f" stroke="#334155"/><text x="137" y="508" class="t">Publication rule</text><text x="137" y="530" class="s">Rewrite abstractions and use synthetic fixtures only</text>
+
+  <rect x="910" y="145" width="620" height="430" rx="24" fill="#151426" stroke="#a78bfa" stroke-width="2"/>
+  <text x="950" y="190" class="k" fill="#a78bfa">PRIVATE RUNTIME</text><text x="950" y="225" class="t">Protected operating environment</text>
+  <g><rect x="950" y="265" width="250" height="76" rx="13" fill="#291d2f" stroke="#fb7185"/><text x="974" y="296" class="t">Evidence</text><text x="974" y="321" class="s">Documents and corpora</text></g>
+  <g><rect x="1240" y="265" width="250" height="76" rx="13" fill="#2a2116" stroke="#f59e0b"/><text x="1264" y="296" class="t">Credentials</text><text x="1264" y="321" class="s">Endpoints and identities</text></g>
+  <g><rect x="950" y="370" width="250" height="76" rx="13" fill="#171a35" stroke="#8b5cf6"/><text x="974" y="401" class="t">Database state</text><text x="974" y="426" class="s">Indexes and embeddings</text></g>
+  <g><rect x="1240" y="370" width="250" height="76" rx="13" fill="#251b2c" stroke="#fb7185"/><text x="1264" y="401" class="t">Evaluation + recovery</text><text x="1264" y="426" class="s">Questions, reports, backups</text></g>
+  <rect x="950" y="482" width="540" height="58" rx="12" fill="#211a26" stroke="#475569"/><text x="977" y="508" class="t">Runtime rule</text><text x="977" y="530" class="s">Never copy protected state into public Git</text>
+
+  <rect x="744" y="145" width="112" height="430" rx="22" fill="#241b12" stroke="#f59e0b" stroke-width="2"/>
+  <path d="M770 175V545M800 175V545M830 175V545" stroke="#f59e0b" stroke-width="3" opacity=".45"/>
+  <text x="800" y="360" class="wall" text-anchor="middle" transform="rotate(-90 800 360)">NO CONNECTION • NO SYNC • NO CREDENTIALS</text>
+
+  <rect x="180" y="615" width="1240" height="54" rx="14" fill="#111827" stroke="#334155"/>
+  <text x="800" y="648" class="foot" text-anchor="middle">Manual publication review may carry design ideas only. There is no private-to-public runtime data path.</text>
+</svg>

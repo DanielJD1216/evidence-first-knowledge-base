@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.ruff_cache/
+.venv/
+.venv*/
+venv/
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets and private state
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+credentials*.json
+secrets/
+private/
+
+# Generated or protected knowledge artifacts
+corpus/
+embeddings/
+model-cache/
+reports/
+backups/
+deployments/
+*.dump
+*.jsonl

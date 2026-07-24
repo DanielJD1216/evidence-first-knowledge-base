@@ -1,0 +1,72 @@
+name: Validate public reference
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+
+      - name: Install independent validators
+        run: python3 -m pip install -r requirements-validation.txt
+
+      - name: Validate repository shape, contracts, links, SVGs, and publication safety
+        run: python3 scripts/validate_repo.py
+
+      - name: Lint and security-check validation code
+        run: |
+          ruff check scripts
+          bandit -q -r scripts
+
+      - name: Validate examples with Draft 2020-12 JSON Schema
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          for path in Path("examples").glob("*.json"):
+              example = json.loads(path.read_text(encoding="utf-8"))
+              destination = Path("/tmp") / f"{path.stem}.payload.json"
+              destination.write_text(json.dumps(example["payload"]), encoding="utf-8")
+          PY
+          for example in examples/*.json; do
+            name="$(basename "$example" .json)"
+            check-jsonschema \
+              --schemafile "schemas/${name}.schema.json" \
+              "/tmp/${name}.payload.json"
+          done
+
+      - name: Scan for known secret formats
+        shell: bash
+        run: |
+          detect-secrets scan --all-files \
+            --disable-plugin HexHighEntropyString \
+            --disable-plugin Base64HighEntropyString \
+            --exclude-files '(^|/)(\.git|\.venv[^/]*|\.ruff_cache|__pycache__)/' \
+            > /tmp/detect-secrets.json
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          report = json.loads(Path("/tmp/detect-secrets.json").read_text(encoding="utf-8"))
+          findings = sum(len(items) for items in report.get("results", {}).values())
+          if findings:
+              raise SystemExit(f"detect-secrets found {findings} possible secret(s)")
+          print("detect-secrets found 0 possible secrets")
+          PY

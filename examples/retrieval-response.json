@@ -1,0 +1,27 @@
+{
+  "contract": "https://raw.githubusercontent.com/DanielJD1216/evidence-first-knowledge-base/main/schemas/retrieval-response.schema.json",
+  "payload": {
+    "schema_version": "1.0",
+    "query_id": "qry_demo_incident_0001",
+    "status": "answered",
+    "scope": "demo-project",
+    "pipeline_version": "public-contract-v1",
+    "abstention_reason": null,
+    "results": [
+      {
+        "rank": 1,
+        "evidence_id": "ev_demo_support_policy_0001",
+        "score": 0.94,
+        "excerpt": "Priority-one incidents require acknowledgment within thirty minutes.",
+        "citation": {
+          "title": "Synthetic Support Policy",
+          "locator": "demo://handbook/support-policy#priority-one",
+          "source_timestamp": "2026-01-15T18:00:00Z",
+          "section": "Priority one",
+          "page": null,
+          "timestamp_seconds": null
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/DanielJD1216/evidence-first-knowledge-base/main/schemas/evidence-record.schema.json",
+  "title": "Normalized evidence record",
+  "description": "A provider-neutral record with required provenance, access metadata, and deletion state.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_id",
+    "source_id",
+    "source_record_id",
+    "content_type",
+    "title",
+    "content",
+    "content_hash",
+    "source_timestamp",
+    "ingested_at",
+    "provenance",
+    "access",
+    "state"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "evidence_id": {"type": "string", "pattern": "^ev_[a-zA-Z0-9_-]{8,128}$"},
+    "source_id": {"type": "string", "minLength": 1, "maxLength": 128},
+    "source_record_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "content_type": {"type": "string", "minLength": 1, "maxLength": 128},
+    "title": {"type": "string", "minLength": 1, "maxLength": 512},
+    "content": {"type": "string", "minLength": 1},
+    "content_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+    "source_timestamp": {"type": "string", "format": "date-time"},
+    "ingested_at": {"type": "string", "format": "date-time"},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_type", "locator"],
+      "properties": {
+        "source_type": {"type": "string", "minLength": 1, "maxLength": 64},
+        "locator": {"type": "string", "minLength": 1, "maxLength": 1024},
+        "section": {"type": ["string", "null"], "maxLength": 512},
+        "page": {"type": ["integer", "null"], "minimum": 1},
+        "timestamp_seconds": {"type": ["number", "null"], "minimum": 0}
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope", "principals"],
+      "properties": {
+        "scope": {"type": "string", "minLength": 1, "maxLength": 128},
+        "principals": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1, "maxLength": 128},
+          "uniqueItems": true,
+          "minItems": 1
+        }
+      }
+    },
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active", "deleted_at"],
+      "properties": {
+        "active": {"type": "boolean"},
+        "deleted_at": {"type": ["string", "null"], "format": "date-time"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"active": {"const": true}}, "required": ["active"]},
+          "then": {"properties": {"deleted_at": {"const": null}}},
+          "else": {"properties": {"deleted_at": {"type": "string", "format": "date-time"}}}
+        }
+      ]
+    }
+  }
+}

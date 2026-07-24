@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Evidence-first knowledge architecture with optional Source Wire integration</title>
+  <desc id="desc">Owner-selected sources enter the governed knowledge-base boundary for normalization, PostgreSQL and pgvector indexing, authorization, retrieval, and citations. Humans and approved agent harnesses consume authorized results. A future owner-controlled KnowledgeProvider v1 adapter may expose read-only evidence to the separate Source Wire governed-memory layer. Source Wire does not write to the knowledge base.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#07111f"/><stop offset="1" stop-color="#0d1020"/></linearGradient>
+    <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#111d31"/><stop offset="1" stop-color="#0b1425"/></linearGradient>
+    <filter id="glow"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    <marker id="cyan" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#38bdf8"/></marker>
+    <marker id="violet" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#a78bfa"/></marker>
+    <style>
+      .h{font:700 34px Inter,Segoe UI,sans-serif;fill:#f8fafc}.sub{font:400 17px Inter,Segoe UI,sans-serif;fill:#94a3b8}.k{font:700 13px Inter,Segoe UI,sans-serif;letter-spacing:2px;fill:#38bdf8}.t{font:650 19px Inter,Segoe UI,sans-serif;fill:#f8fafc}.s{font:400 14px Inter,Segoe UI,sans-serif;fill:#94a3b8}.mini{font:600 13px Inter,Segoe UI,sans-serif;fill:#cbd5e1}.note{font:500 14px Inter,Segoe UI,sans-serif;fill:#fbbf24}.line{fill:none;stroke:#38bdf8;stroke-width:2;marker-end:url(#cyan)}.vline{fill:none;stroke:#a78bfa;stroke-width:2;marker-end:url(#violet)}
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <path d="M0 165H1600M0 810H1600" stroke="#1e293b"/><circle cx="1490" cy="90" r="180" fill="#1d4ed8" opacity=".07"/><circle cx="1240" cy="760" r="220" fill="#7c3aed" opacity=".07"/>
+
+  <text x="70" y="70" class="h">Evidence-first knowledge architecture</text>
+  <text x="70" y="104" class="sub">The knowledge base governs evidence retrieval. Source Wire remains a separate, optional memory layer.</text>
+
+  <text x="70" y="175" class="k">OWNER-SELECTED SOURCES</text>
+  <text x="410" y="175" class="k">GOVERNED KNOWLEDGE-BASE BOUNDARY</text>
+  <text x="1160" y="175" class="k">AUTHORIZED CONSUMERS</text>
+
+  <rect x="60" y="200" width="285" height="560" rx="22" fill="url(#panel)" stroke="#334155"/>
+  <g><rect x="88" y="245" width="229" height="82" rx="14" fill="#0c2940" stroke="#0ea5e9"/><text x="112" y="278" class="t">Documents</text><text x="112" y="305" class="s">Policies, wikis, files</text></g>
+  <g><rect x="88" y="355" width="229" height="82" rx="14" fill="#171a35" stroke="#8b5cf6"/><text x="112" y="388" class="t">Conversations</text><text x="112" y="415" class="s">Chats and transcripts</text></g>
+  <g><rect x="88" y="465" width="229" height="82" rx="14" fill="#2a2116" stroke="#f59e0b"/><text x="112" y="498" class="t">Media</text><text x="112" y="525" class="s">Meetings and recordings</text></g>
+  <g><rect x="88" y="575" width="229" height="110" rx="14" fill="#0f1b2d" stroke="#475569"/><text x="112" y="610" class="t">Source authority</text><text x="112" y="638" class="s">Original systems remain</text><text x="112" y="660" class="s">the master record</text></g>
+
+  <rect x="385" y="200" width="715" height="560" rx="22" fill="#071525" stroke="#0ea5e9" stroke-width="2"/>
+  <rect x="420" y="245" width="295" height="145" rx="18" fill="#0c2940" stroke="#38bdf8"/>
+  <text x="448" y="282" class="t">Ingestion and governance</text><text x="448" y="312" class="s">Approved sources, identity, checksums</text><text x="448" y="336" class="s">provenance, access, deletion</text><text x="448" y="368" class="mini">INVALID METADATA FAILS CLOSED</text>
+
+  <rect x="770" y="245" width="295" height="145" rx="18" fill="#171a35" stroke="#8b5cf6"/>
+  <text x="798" y="282" class="t">Governed index</text><text x="798" y="312" class="s">PostgreSQL records and FTS</text><text x="798" y="336" class="s">pgvector and structural chunks</text><text x="798" y="368" class="mini">ACTIVE EVIDENCE ONLY</text>
+
+  <rect x="545" y="475" width="390" height="190" rx="18" fill="#0c2032" stroke="#22d3ee" filter="url(#glow)"/>
+  <text x="575" y="515" class="t">Authorized retrieval</text><text x="575" y="547" class="s">Identity + entitlement before search</text><text x="575" y="573" class="s">Lexical + vector candidates, fusion</text><text x="575" y="599" class="s">Local reranking, relevance gate</text><text x="575" y="625" class="s">Evidence records, citations, abstention</text>
+
+  <path d="M345 470H385" class="line"/><path d="M715 317H770" class="line"/><path d="M917 390V438Q917 455 900 455H760V475" class="vline"/>
+  <path d="M565 390V438Q565 455 582 455H720V475" class="line"/>
+
+  <rect x="1140" y="200" width="400" height="560" rx="22" fill="url(#panel)" stroke="#334155"/>
+  <rect x="1170" y="240" width="340" height="85" rx="15" fill="#0c2940" stroke="#38bdf8"/><text x="1198" y="274" class="t">Human operators</text><text x="1198" y="301" class="s">Authorized search and verification</text>
+  <rect x="1170" y="350" width="340" height="85" rx="15" fill="#171a35" stroke="#8b5cf6"/><text x="1198" y="384" class="t">Approved agent harnesses</text><text x="1198" y="411" class="s">Evidence first, synthesis second</text>
+
+  <rect x="1170" y="485" width="340" height="230" rx="18" fill="#171425" stroke="#a78bfa"/>
+  <text x="1198" y="520" class="t">Source Wire governed memory</text>
+  <rect x="1198" y="545" width="284" height="62" rx="12" fill="#10283f" stroke="#38bdf8"/><text x="1218" y="571" class="mini">KnowledgeProvider v1 adapter</text><text x="1218" y="592" class="s">Future, owner-controlled, read-only</text>
+  <rect x="1198" y="627" width="284" height="58" rx="12" fill="#2b2032" stroke="#a78bfa"/><text x="1218" y="652" class="mini">Policy → candidate → owner approval</text><text x="1218" y="674" class="s">Trusted memory only after approval</text>
+  <path d="M1340 607V627" class="vline"/>
+
+  <path d="M935 535H1115Q1130 535 1130 520V283Q1130 282 1140 282" class="line"/>
+  <path d="M935 585H1115Q1130 585 1130 410Q1130 392 1140 392" class="vline"/>
+  <path d="M935 620H1145Q1165 620 1165 600V576H1198" class="vline"/>
+
+  <rect x="70" y="825" width="1460" height="44" rx="12" fill="#111827" stroke="#334155"/>
+  <text x="100" y="853" class="note">ONE-WAY INTEGRATION RULE</text><text x="318" y="853" class="s">Source Wire may read authorized evidence through KnowledgeProvider v1. It does not write to the knowledge base or public repository.</text>
+</svg>

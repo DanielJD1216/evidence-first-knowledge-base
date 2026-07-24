@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/DanielJD1216/evidence-first-knowledge-base/main/schemas/retrieval-response.schema.json",
+  "title": "Citation-first retrieval response",
+  "description": "An authorized evidence response that must either answer with cited results or abstain with a reason.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "query_id",
+    "status",
+    "scope",
+    "pipeline_version",
+    "abstention_reason",
+    "results"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "query_id": {"type": "string", "pattern": "^qry_[a-zA-Z0-9_-]{8,128}$"},
+    "status": {"type": "string", "enum": ["answered", "abstained"]},
+    "scope": {"type": "string", "minLength": 1, "maxLength": 128},
+    "pipeline_version": {"type": "string", "minLength": 1, "maxLength": 128},
+    "abstention_reason": {"type": ["string", "null"], "maxLength": 512},
+    "results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rank", "evidence_id", "score", "excerpt", "citation"],
+        "properties": {
+          "rank": {"type": "integer", "minimum": 1},
+          "evidence_id": {"type": "string", "pattern": "^ev_[a-zA-Z0-9_-]{8,128}$"},
+          "score": {"type": "number", "minimum": 0},
+          "excerpt": {"type": "string", "minLength": 1},
+          "citation": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["title", "locator", "source_timestamp"],
+            "properties": {
+              "title": {"type": "string", "minLength": 1, "maxLength": 512},
+              "locator": {"type": "string", "minLength": 1, "maxLength": 1024},
+              "source_timestamp": {"type": "string", "format": "date-time"},
+              "section": {"type": ["string", "null"], "maxLength": 512},
+              "page": {"type": ["integer", "null"], "minimum": 1},
+              "timestamp_seconds": {"type": ["number", "null"], "minimum": 0}
+            }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "answered"}}, "required": ["status"]},
+      "then": {
+        "properties": {
+          "abstention_reason": {"const": null},
+          "results": {"minItems": 1}
+        }
+      },
+      "else": {
+        "properties": {
+          "abstention_reason": {"type": "string", "minLength": 1},
+          "results": {"maxItems": 0}
+        }
+      }
+    }
+  ]
+}

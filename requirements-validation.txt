@@ -1,0 +1,4 @@
+bandit==1.8.6
+check-jsonschema==0.33.3
+detect-secrets==1.5.0
+ruff==0.12.5
