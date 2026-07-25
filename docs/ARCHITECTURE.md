@@ -111,21 +111,21 @@ Boundary rules:
 - Source Wire does not write evidence into the knowledge-base index.
 - Neither private runtime has a connection to this public documentation repository.
 
-Source Wire's latest source contains an unpublished `0.2.0` candidate for the
-contract, but the currently published `0.1.0` package does not contain
-`KnowledgeProvider v1`. Source Wire does not include live knowledge
-connectors. This repository intentionally does not fork or duplicate that
-contract.
+`@source-wire/contracts@0.2.0` is the stable published authority for
+`KnowledgeProvider v1`. This repository imports that exact package in its
+private, synthetic adapter candidate and does not fork or duplicate the
+contract. Source Wire still does not include a live knowledge connector.
 
 The next adapter boundary is prepared in
 [`SOURCE_WIRE_ADAPTER_STORY_1.md`](SOURCE_WIRE_ADAPTER_STORY_1.md). It keeps the
 executable adapter beside a runnable knowledge-base retrieval boundary while
-this public repository owns only portable contracts, mapping rules, synthetic
-fixtures, and publication-safe conformance expectations. Implementation,
-private credentials, real evidence, deployment, and production use remain
-separately blocked. A published contract alone is not enough for integration:
-Source Wire must also expose a supported immutable provider-host composition
-surface.
+this public repository owns portable contracts, mapping rules, synthetic
+fixtures, a private-package synthetic adapter, and publication-safe conformance
+expectations. The synthetic adapter, authorized snapshot contract, and
+fail-closed tests are implemented. Private credentials, a live authorized
+reader, real evidence, deployment, and production use remain separately
+blocked. Cross-repository proof must use Source Wire's unchanged generic local
+provider composition rather than importing Alpha internals here.
 
 ## Evidence lifecycle
 

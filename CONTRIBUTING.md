@@ -29,6 +29,14 @@ Read:
 
 ## Validation
 
+Use Node.js 22.23.1 for the synthetic adapter:
+
+```bash
+npm ci
+npm test
+npm run pack:inspect
+```
+
 Run the zero-dependency structural gate first:
 
 ```bash

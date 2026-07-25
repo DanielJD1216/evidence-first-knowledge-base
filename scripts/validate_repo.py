@@ -14,9 +14,24 @@ import xml.etree.ElementTree as ET  # nosec B405
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA_DIR = ROOT / "schemas"
 EXAMPLE_DIR = ROOT / "examples"
-SKIP_PARTS = {".git", ".ruff_cache", ".venv", "__pycache__"}
-EXPECTED_SCHEMAS = {"evidence-record.schema.json", "retrieval-response.schema.json"}
-EXPECTED_EXAMPLES = {"evidence-record.json", "retrieval-response.json"}
+SKIP_PARTS = {
+    ".git",
+    ".ruff_cache",
+    ".venv",
+    "__pycache__",
+    "dist",
+    "node_modules",
+}
+EXPECTED_SCHEMAS = {
+    "authorized-evidence-snapshot.schema.json",
+    "evidence-record.schema.json",
+    "retrieval-response.schema.json",
+}
+EXPECTED_EXAMPLES = {
+    "authorized-evidence-snapshot.json",
+    "evidence-record.json",
+    "retrieval-response.json",
+}
 EXPECTED_SVGS = {"retrieval-flow.svg", "system-architecture.svg", "trust-boundaries.svg"}
 REQUIRED_PATHS = {
     ".github/SECURITY.md",
@@ -25,11 +40,17 @@ REQUIRED_PATHS = {
     "CONTRIBUTING.md",
     "LICENSE",
     "README.md",
+    "package-lock.json",
+    "package.json",
     "requirements-validation.txt",
     "assets/knowledge-hero.webp",
     "docs/ARCHITECTURE.md",
     "docs/SECURITY_MODEL.md",
+    "docs/SOURCE_WIRE_ADAPTER_STORY_1.md",
     "scripts/validate_repo.py",
+    "src/index.ts",
+    "tests/source-wire-adapter.test.ts",
+    "tsconfig.json",
     *(f"assets/{name}" for name in EXPECTED_SVGS),
     *(f"examples/{name}" for name in EXPECTED_EXAMPLES),
     *(f"schemas/{name}" for name in EXPECTED_SCHEMAS),
@@ -235,6 +256,8 @@ def validate_markdown_links(errors: list[str]) -> int:
     link_pattern = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
     html_image_pattern = re.compile(r"\bsrc=[\"']([^\"']+)[\"']")
     for path in sorted(ROOT.rglob("*.md")):
+        if any(part in SKIP_PARTS or part.startswith(".venv") for part in path.parts):
+            continue
         text = path.read_text(encoding="utf-8")
         targets = link_pattern.findall(text) + html_image_pattern.findall(text)
         for target in targets:

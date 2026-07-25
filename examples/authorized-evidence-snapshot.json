@@ -1,0 +1,34 @@
+{
+  "contract": "https://raw.githubusercontent.com/DanielJD1216/evidence-first-knowledge-base/main/schemas/authorized-evidence-snapshot.schema.json",
+  "payload": {
+    "schema": "evidence-first.authorized-evidence-snapshot.v1",
+    "evidence_id": "record_release_review",
+    "source_id": "source_release_runbook",
+    "segment_id": "segment_owner_gate",
+    "source_version": "release-runbook-v3",
+    "content_hash": {
+      "algorithm": "sha256",
+      "value": "402330cbefefbc461668edeaf50f8423e898c828e489cd5edc3d260200747198"
+    },
+    "citation": {
+      "locator": "synthetic://evidence-first/release-review",
+      "public_safe": true
+    },
+    "title": "Synthetic release review",
+    "excerpt": "Synthetic evidence: a release requires an explicit owner review before distribution.",
+    "media_type": "text/markdown",
+    "truncated": false,
+    "sensitivity": "internal",
+    "freshness": "fresh",
+    "source_modified_at": "2026-07-23T10:00:00.000Z",
+    "lifecycle": {
+      "active": true,
+      "deleted": false
+    },
+    "access": {
+      "decision": "allowed",
+      "runtime_principal_id": "principal_evidence_reader",
+      "knowledge_scope_id": "knowledge_scope_public_synthetic"
+    }
+  }
+}

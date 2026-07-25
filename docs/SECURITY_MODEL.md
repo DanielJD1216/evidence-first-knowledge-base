@@ -80,6 +80,8 @@ Private evidence may cross this boundary only when an operator explicitly enable
 | A restore reintroduces unsafe ownership | Recovery reconstructs owners, ACLs, and default privileges before service access |
 | Hosted inference receives private data silently | Explicit operator opt-in and separately approved provider boundary |
 | Ranking is tuned to a known test set | Protected holdout evaluation outside Git |
+| A Source Wire adapter receives broader authority than retrieval requires | Adapter gets only a provider-owned principal, scope, bounded request, and deadline |
+| Provider evidence is treated as trusted memory | Adapter returns `internal_unreleased`, no-mutation results and Source Wire retains audit, release, and owner-approval authority |
 
 ## Identity rule
 

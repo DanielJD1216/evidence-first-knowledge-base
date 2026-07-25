@@ -1,6 +1,6 @@
 # Source Wire Adapter Story 1
 
-Status: design prepared, implementation not started.
+Status: synthetic adapter implemented, cross-repository conformance pending.
 
 ## Outcome
 
@@ -56,30 +56,24 @@ authorized snapshot containing:
 The adapter must not invent missing values or infer authorization from a scope
 string.
 
-## Pre-Implementation Blockers
+## Resolved Synthetic Prerequisites
 
-Publishing Source Wire's contract candidate is necessary but not sufficient.
-The current `0.2.0` package candidate intentionally excludes the Alpha provider
-host, so an external adapter has no stable supported host-composition surface
-to inject into.
+The synthetic adapter imports the published
+`@source-wire/contracts@0.2.0` package and has no dependency on Source Wire's
+unpublished Alpha implementation. Source Wire latest source provides an
+owner-selected package-module composition seam through the same private local
+CLI used by its repository synthetic provider.
 
-Before adapter implementation:
+The following synthetic prerequisites are satisfied:
 
-1. Source Wire must publish a stable package containing
-   `SourceWireKnowledgeProviderV1`.
-2. Source Wire must expose a supported immutable provider-host injection
-   surface, or publish a separate host package with the same protected-release
-   behavior.
-3. The host must consume the authoritative public contract directly, or
-   document and test an explicit host subset. The current public profile
-   includes `providerFamily`, `describe`, and `health`, while the Alpha host
-   executes only search and exact fetch.
-4. Contract and host identifier bounds must be reconciled. The Alpha runtime
-   limits Source Wire identifiers to 64 characters, while this repository's
-   public IDs allow longer values.
+1. Source Wire published `SourceWireKnowledgeProviderV1` in version `0.2.0`.
+2. The adapter uses the complete profile, including `describe` and `health`.
+3. Synthetic provider, owner, namespace, principal, and scope identifiers fit
+   the current Source Wire host bounds.
+4. The adapter maps only complete authorized snapshots and fails closed on
+   lifecycle, scope, provenance, result-bound, and deadline defects.
 
-Depending on an unpublished Alpha workspace or copying its host into the
-knowledge-base runtime is not an acceptable compatibility path.
+The adapter still does not import or copy the unpublished Alpha host.
 
 ## Chosen Seam
 
@@ -92,7 +86,7 @@ This public repository owns:
 - provider-neutral evidence and retrieval contracts,
 - an additive authorized-evidence snapshot contract,
 - the mapping specification,
-- synthetic fixtures,
+- synthetic fixtures and a private-package synthetic adapter,
 - publication-safe conformance expectations.
 
 The runnable knowledge-base system owns:
@@ -306,33 +300,22 @@ The synthetic integration must prove:
 
 ## Story Slices
 
-Implementation should remain blocked until separately approved. When approved,
-use these risk-ordered slices:
+The owner approved the synthetic implementation path. Current slice status:
 
-1. **Source Wire host compatibility, Source Wire:** publish the provider
-   contract and a supported immutable host-composition surface that consumes
-   the authoritative contract or a tested explicit subset.
-2. **Additive snapshot contract, this repository:** add a new portable
-   authorized-evidence snapshot schema and synthetic example. Preserve the
-   existing evidence-record and retrieval-response contracts.
-3. **Callable reader, runnable knowledge-base repository:** implement bounded
-   search and exact fetch behind a query-only identity using synthetic data.
-4. **Adapter mapping, runnable knowledge-base repository:** implement
-   `SourceWireKnowledgeProviderV1` against the reader with strict mapping and
-   safe errors.
-5. **Adversarial tests, runnable knowledge-base repository:** prove metadata,
-   scope, deadline, bound, deletion, and mutation failures release zero
-   evidence.
-6. **Cross-repository conformance, private integration harness:** run the
-   adapter through Source Wire's provider host and disposable protected-read
-   path using synthetic data only.
+1. **Source Wire host compatibility:** complete for synthetic local proof.
+2. **Additive snapshot contract:** implemented in this repository.
+3. **Callable synthetic reader:** implemented with search and exact fetch only.
+4. **Adapter mapping:** implemented against the published contract.
+5. **Adversarial tests:** implemented for lifecycle, scope, provenance, bounds,
+   deadlines, and no-mutation behavior.
+6. **Cross-repository conformance:** pending in Source Wire.
 
 ## Acceptance Gate
 
 Adapter Story 1 is complete only when:
 
 - a stable Source Wire package containing `KnowledgeProvider v1` is available,
-- a stable supported Source Wire host-composition surface accepts the adapter,
+- the unchanged Source Wire local provider-composition surface accepts the packed adapter,
 - the authoritative provider contract and host subset have explicit
   compatibility tests,
 - search and exact fetch use one query-only callable retrieval boundary,
@@ -348,8 +331,7 @@ Adapter Story 1 is complete only when:
 
 ## Explicitly Not Approved
 
-- Publishing Source Wire `0.2.0`
-- Implementing a private adapter
+- Implementing a private or live-data adapter
 - Adding runtime credentials or endpoints
 - Connecting real evidence
 - Deploying a knowledge-base or Source Wire service

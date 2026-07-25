@@ -57,6 +57,10 @@ When uncertain, leave data out and explain the interface instead.
 - `docs/`: architecture and security reasoning
 - `docs/SOURCE_WIRE_ADAPTER_STORY_1.md`: prepared read-only adapter seam,
   mapping, and synthetic acceptance gate
+- `src/`: publication-safe synthetic Source-Wire adapter implementation
+- `tests/`: public-interface adapter and fail-closed behavior tests
+- `schemas/authorized-evidence-snapshot.schema.json`: complete provider-owned
+  snapshot required before Source-Wire mapping
 - `schemas/`: public JSON contracts
 - `examples/`: synthetic instances of those contracts
 - `scripts/validate_repo.py`: zero-dependency repository validation
@@ -68,8 +72,9 @@ When uncertain, leave data out and explain the interface instead.
 3. Update the smallest relevant contract or document.
 4. Add or update a synthetic example.
 5. Run `python3 scripts/validate_repo.py` and the independent gates in `CONTRIBUTING.md`.
-6. Inspect every staged path before commit.
-7. Confirm no private data, generated state, or credentials are staged.
+6. Run `npm test` for Source-Wire adapter changes.
+7. Inspect every staged path before commit.
+8. Confirm no private data, generated state, or credentials are staged.
 
 ## Definition of done
 

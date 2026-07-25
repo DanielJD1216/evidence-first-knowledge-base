@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/DanielJD1216/evidence-first-knowledge-base/main/schemas/authorized-evidence-snapshot.schema.json",
+  "title": "Authorized Evidence Snapshot v1",
+  "description": "A complete, synthetic, provider-owned evidence snapshot that may be mapped into Source-Wire KnowledgeProvider v1 after runtime authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "evidence_id",
+    "source_id",
+    "segment_id",
+    "source_version",
+    "content_hash",
+    "citation",
+    "title",
+    "excerpt",
+    "media_type",
+    "truncated",
+    "sensitivity",
+    "freshness",
+    "source_modified_at",
+    "lifecycle",
+    "access"
+  ],
+  "properties": {
+    "schema": {
+      "const": "evidence-first.authorized-evidence-snapshot.v1"
+    },
+    "evidence_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "source_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "segment_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "content_hash": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "algorithm",
+        "value"
+      ],
+      "properties": {
+        "algorithm": {
+          "const": "sha256"
+        },
+        "value": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "citation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "locator",
+        "public_safe"
+      ],
+      "properties": {
+        "locator": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2048,
+          "pattern": "^synthetic://.+$"
+        },
+        "public_safe": {
+          "const": true
+        }
+      }
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1024
+    },
+    "excerpt": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 8192
+    },
+    "media_type": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "truncated": {
+      "type": "boolean"
+    },
+    "sensitivity": {
+      "enum": [
+        "public",
+        "internal",
+        "confidential",
+        "restricted"
+      ]
+    },
+    "freshness": {
+      "enum": [
+        "fresh",
+        "stale",
+        "unknown"
+      ]
+    },
+    "source_modified_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "lifecycle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "active",
+        "deleted"
+      ],
+      "properties": {
+        "active": {
+          "const": true
+        },
+        "deleted": {
+          "const": false
+        }
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision",
+        "runtime_principal_id",
+        "knowledge_scope_id"
+      ],
+      "properties": {
+        "decision": {
+          "const": "allowed"
+        },
+        "runtime_principal_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "knowledge_scope_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        }
+      }
+    }
+  }
+}

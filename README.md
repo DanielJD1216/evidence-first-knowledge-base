@@ -52,6 +52,9 @@ Read the deeper architecture note in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Components, data lifecycle, and portability |
 | [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) | Threat boundaries and fail-closed invariants |
 | [`docs/SOURCE_WIRE_ADAPTER_STORY_1.md`](docs/SOURCE_WIRE_ADAPTER_STORY_1.md) | Prepared design for the read-only Source Wire adapter seam |
+| [`schemas/authorized-evidence-snapshot.schema.json`](schemas/authorized-evidence-snapshot.schema.json) | Complete provider-owned snapshot required before Source Wire mapping |
+| [`src/index.ts`](src/index.ts) | Private-package, synthetic-only `KnowledgeProvider v1` adapter |
+| [`tests/source-wire-adapter.test.ts`](tests/source-wire-adapter.test.ts) | Ordered search, exact fetch, authority separation, and fail-closed tests |
 | [`schemas/evidence-record.schema.json`](schemas/evidence-record.schema.json) | Normalized evidence and provenance contract |
 | [`schemas/retrieval-response.schema.json`](schemas/retrieval-response.schema.json) | Citation-first retrieval response contract |
 | [`examples/`](examples/) | Synthetic, publication-safe contract examples |
@@ -135,12 +138,12 @@ The planned integration is read-only:
 4. Provider evidence may support a pending memory candidate, but it cannot approve or promote trusted memory.
 5. Source Wire does not write evidence into this knowledge base, and no private data flows into this public documentation repository.
 
-Source Wire's latest source contains an unpublished `0.2.0` candidate for the
-contract, but the currently published `0.1.0` package does not contain
-`KnowledgeProvider v1`. Source Wire still does not include live knowledge
-connectors. This repository will not duplicate that contract. Its local
-evidence and retrieval schemas remain provider-neutral, and a future adapter
-must map them to the authoritative Source Wire types.
+`@source-wire/contracts@0.2.0` is now the stable published contract dependency.
+This repository includes a private, publication-safe synthetic adapter package
+that imports that exact release and maps a provider-owned authorized evidence
+reader into `KnowledgeProvider v1`. It contains no live database connection,
+credential, endpoint, entitlement engine, ranking implementation, or real
+evidence. Source Wire still does not include live knowledge connectors.
 
 ## For AI agents
 
@@ -161,17 +164,19 @@ Validate the repository with:
 
 ```bash
 python3 scripts/validate_repo.py
+npm ci
+npm test
 ```
 
 ## Project status
 
 **Current release:** public reference architecture and contracts.
 
-**Next release boundary:** the prepared
-[`Source Wire Adapter Story 1`](docs/SOURCE_WIRE_ADAPTER_STORY_1.md) design.
-Implementation remains blocked pending separate approval and a stable Source
-Wire package containing `KnowledgeProvider v1` plus a supported provider-host
-composition surface.
+**Current integration boundary:** the synthetic adapter and complete authorized
+snapshot contract are implemented locally against
+`@source-wire/contracts@0.2.0`. Cross-repository conformance must still prove
+the unchanged Source Wire local CLI can load the packed adapter and release
+synthetic evidence only after its protected audit and receipt path.
 
 Planned public work:
 
@@ -180,7 +185,8 @@ Planned public work:
 - [x] Evidence and retrieval schemas
 - [x] Synthetic examples and repository validation
 - [x] Read-only Source Wire adapter design and risk-ordered story slices
-- [ ] Read-only Source Wire `KnowledgeProvider v1` adapter implementation
+- [x] Synthetic read-only Source Wire `KnowledgeProvider v1` adapter implementation
+- [ ] Live owner-controlled knowledge-base reader
 - [ ] Sanitized reference ingestion path
 - [ ] Reproducible local evaluation harness
 - [ ] Runnable starter deployment after security review
