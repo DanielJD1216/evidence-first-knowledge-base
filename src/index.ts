@@ -197,6 +197,7 @@ export function createEvidenceFirstSyntheticProviderForConformance(input: {
   scenario: EvidenceFirstSyntheticScenario;
 }): SourceWireKnowledgeProviderV1 {
   let nowCalls = 0;
+  const startedAt = Date.now();
   return createEvidenceFirstKnowledgeProvider({
     binding: syntheticBinding(),
     reader: createSyntheticAuthorizedReader(input.scenario),
@@ -204,8 +205,8 @@ export function createEvidenceFirstSyntheticProviderForConformance(input: {
       nowCalls += 1;
       return new Date(
         input.scenario === "late" && nowCalls > 1
-          ? "2026-07-25T12:00:11.000Z"
-          : "2026-07-25T12:00:00.000Z"
+          ? startedAt + 60_000
+          : Date.now()
       );
     }
   });

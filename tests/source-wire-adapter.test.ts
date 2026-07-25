@@ -11,6 +11,10 @@ import {
   EVIDENCE_FIRST_SYNTHETIC_NAMESPACE_ID
 } from "../src/index.js";
 
+function futureDeadline(): string {
+  return new Date(Date.now() + 10_000).toISOString();
+}
+
 test("authorized search returns bounded evidence in provider order", async () => {
   const provider = createEvidenceFirstSyntheticProvider();
   const result = await provider.execute({
@@ -29,7 +33,7 @@ test("authorized search returns bounded evidence in provider order", async () =>
         requirement: "required"
       }
     ],
-    deadlineAt: "2026-07-25T12:00:10.000Z",
+    deadlineAt: futureDeadline(),
     search: {
       query: "owner review",
       maximumResults: 2
@@ -71,7 +75,7 @@ test("exact fetch returns only the matching source and segment", async () => {
         requirement: "required"
       }
     ],
-    deadlineAt: "2026-07-25T12:00:10.000Z",
+    deadlineAt: futureDeadline(),
     get: {
       sourceId: "source_recovery_runbook",
       segmentId: "segment_restore_gate"
@@ -106,7 +110,7 @@ test("health check exposes readiness without releasing evidence", async () => {
         requirement: "required"
       }
     ],
-    deadlineAt: "2026-07-25T12:00:10.000Z"
+    deadlineAt: futureDeadline()
   });
 
   assert.equal(result.status, "allowed");
@@ -207,7 +211,7 @@ test("unsafe lifecycle, scope, provenance, bounds, and timing release zero evide
           requirement: "required"
         }
       ],
-      deadlineAt: "2026-07-25T12:00:10.000Z",
+      deadlineAt: futureDeadline(),
       search: {
         query: "owner review",
         maximumResults: 2
