@@ -78,7 +78,7 @@ Run the independent known-secret scanner:
 .venv-validation/bin/detect-secrets scan --all-files \
   --disable-plugin HexHighEntropyString \
   --disable-plugin Base64HighEntropyString \
-  --exclude-files '(^|/)(\.git|\.venv[^/]*|\.ruff_cache|__pycache__)/' \
+  --exclude-files '(^|/)(\.git|\.venv[^/]*|\.ruff_cache|__pycache__|node_modules)/' \
   > /tmp/detect-secrets.json
 .venv-validation/bin/python - <<'PY'
 import json

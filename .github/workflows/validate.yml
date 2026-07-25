@@ -73,7 +73,7 @@ jobs:
           detect-secrets scan --all-files \
             --disable-plugin HexHighEntropyString \
             --disable-plugin Base64HighEntropyString \
-            --exclude-files '(^|/)(\.git|\.venv[^/]*|\.ruff_cache|__pycache__)/' \
+            --exclude-files '(^|/)(\.git|\.venv[^/]*|\.ruff_cache|__pycache__|node_modules)/' \
             > /tmp/detect-secrets.json
           python3 - <<'PY'
           import json
