@@ -51,6 +51,7 @@ Read the deeper architecture note in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.
 | [`.github/SECURITY.md`](.github/SECURITY.md) | Private vulnerability-reporting policy |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Components, data lifecycle, and portability |
 | [`docs/SECURITY_MODEL.md`](docs/SECURITY_MODEL.md) | Threat boundaries and fail-closed invariants |
+| [`docs/SOURCE_WIRE_ADAPTER_STORY_1.md`](docs/SOURCE_WIRE_ADAPTER_STORY_1.md) | Prepared design for the read-only Source Wire adapter seam |
 | [`schemas/evidence-record.schema.json`](schemas/evidence-record.schema.json) | Normalized evidence and provenance contract |
 | [`schemas/retrieval-response.schema.json`](schemas/retrieval-response.schema.json) | Citation-first retrieval response contract |
 | [`examples/`](examples/) | Synthetic, publication-safe contract examples |
@@ -134,7 +135,12 @@ The planned integration is read-only:
 4. Provider evidence may support a pending memory candidate, but it cannot approve or promote trusted memory.
 5. Source Wire does not write evidence into this knowledge base, and no private data flows into this public documentation repository.
 
-Source Wire currently publishes the contract but does not include live knowledge connectors. This repository will not duplicate that contract. Its local evidence and retrieval schemas remain provider-neutral, and a future adapter must map them to the authoritative Source Wire types.
+Source Wire's latest source contains an unpublished `0.2.0` candidate for the
+contract, but the currently published `0.1.0` package does not contain
+`KnowledgeProvider v1`. Source Wire still does not include live knowledge
+connectors. This repository will not duplicate that contract. Its local
+evidence and retrieval schemas remain provider-neutral, and a future adapter
+must map them to the authoritative Source Wire types.
 
 ## For AI agents
 
@@ -161,7 +167,11 @@ python3 scripts/validate_repo.py
 
 **Current release:** public reference architecture and contracts.
 
-**Next release boundary:** a sanitized, read-only `KnowledgeProvider v1` adapter after Source Wire's live provider runtime boundary is ready.
+**Next release boundary:** the prepared
+[`Source Wire Adapter Story 1`](docs/SOURCE_WIRE_ADAPTER_STORY_1.md) design.
+Implementation remains blocked pending separate approval and a stable Source
+Wire package containing `KnowledgeProvider v1` plus a supported provider-host
+composition surface.
 
 Planned public work:
 
@@ -169,7 +179,8 @@ Planned public work:
 - [x] AI-agent operating contract
 - [x] Evidence and retrieval schemas
 - [x] Synthetic examples and repository validation
-- [ ] Read-only Source Wire `KnowledgeProvider v1` adapter
+- [x] Read-only Source Wire adapter design and risk-ordered story slices
+- [ ] Read-only Source Wire `KnowledgeProvider v1` adapter implementation
 - [ ] Sanitized reference ingestion path
 - [ ] Reproducible local evaluation harness
 - [ ] Runnable starter deployment after security review

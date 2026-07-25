@@ -111,7 +111,21 @@ Boundary rules:
 - Source Wire does not write evidence into the knowledge-base index.
 - Neither private runtime has a connection to this public documentation repository.
 
-Source Wire currently publishes the contract but does not include live knowledge connectors. This repository intentionally does not fork or duplicate that contract.
+Source Wire's latest source contains an unpublished `0.2.0` candidate for the
+contract, but the currently published `0.1.0` package does not contain
+`KnowledgeProvider v1`. Source Wire does not include live knowledge
+connectors. This repository intentionally does not fork or duplicate that
+contract.
+
+The next adapter boundary is prepared in
+[`SOURCE_WIRE_ADAPTER_STORY_1.md`](SOURCE_WIRE_ADAPTER_STORY_1.md). It keeps the
+executable adapter beside a runnable knowledge-base retrieval boundary while
+this public repository owns only portable contracts, mapping rules, synthetic
+fixtures, and publication-safe conformance expectations. Implementation,
+private credentials, real evidence, deployment, and production use remain
+separately blocked. A published contract alone is not enough for integration:
+Source Wire must also expose a supported immutable provider-host composition
+surface.
 
 ## Evidence lifecycle
 

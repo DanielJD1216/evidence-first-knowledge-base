@@ -15,6 +15,9 @@ Before changing files, read:
 3. `docs/ARCHITECTURE.md`
 4. The relevant schema and synthetic example
 
+For Source Wire adapter work, also read
+`docs/SOURCE_WIRE_ADAPTER_STORY_1.md`.
+
 ## Non-negotiable invariants
 
 1. **No private evidence in Git.** All examples must be synthetic.
@@ -52,6 +55,8 @@ When uncertain, leave data out and explain the interface instead.
 
 - `assets/`: publication-safe visual assets
 - `docs/`: architecture and security reasoning
+- `docs/SOURCE_WIRE_ADAPTER_STORY_1.md`: prepared read-only adapter seam,
+  mapping, and synthetic acceptance gate
 - `schemas/`: public JSON contracts
 - `examples/`: synthetic instances of those contracts
 - `scripts/validate_repo.py`: zero-dependency repository validation
